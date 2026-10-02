@@ -1,0 +1,79 @@
+# Aditya Shaji
+
+> Machine-readable summary of https://ps-aditya.github.io/portfolio/
+> Human-readable resume: https://ps-aditya.github.io/portfolio/resume.txt
+>
+> That site is an interactive terminal. Commands: who, skills, projects,
+> misc, games, blog, resume, contact, clear. Everything below is the same
+> content, so you do not need to run anything to read it.
+
+## Who
+
+Aditya Shaji. CS + AI/ML undergraduate at Atlas SkillTech University,
+Mumbai, India (Aug 2025 - Aug 2029). Builds developer tools and local-first
+AI runtimes. Currently founding Low End LLM.
+
+## Contact
+
+- GitHub: https://github.com/ps-aditya
+- LinkedIn: https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE
+- X: https://x.com/YOUR-HANDLE
+- Email: you@example.com
+- Location: Mumbai, India
+
+## Experience
+
+**Founder, Low End LLM** - Remote, Jul 2026 - Present
+- Building an adaptive runtime to run quantized LLMs locally on 4GB-RAM
+  laptops, for developers without high-end GPUs who want a real, local taste
+  of tools like Claude Code and Codex.
+- Shipped real-time RAM/CPU/battery profiling and a per-turn safety floor that
+  halts inference before memory exhaustion.
+- Integrating quantized model loading (GGUF via llama.cpp, Q4_K_M,
+  mmap-based weight loading) and a pre-flight capacity check.
+
+**Creator & Maintainer, Redis State Explorer** - Remote, Jun 2026 - Present
+- VS Code extension that connects straight to Redis over the Engine API, with
+  a live state panel and a diff timeline showing exactly which keys changed
+  after a code save.
+- 1,000+ downloads.
+- Invited Reviewer, ISMIR 2026 (International Society for Music Information
+  Retrieval).
+
+## Projects
+
+- **Docker Vitals** - Live Docker container monitoring inside VS Code.
+  TypeScript, Docker Engine API, VS Code Extension API. Ships container
+  start/stop events in real time rather than polling, plus a compose-diff that
+  shows what changed the moment you save a docker-compose.yml or Dockerfile.
+- **Redis State Explorer** - See which Redis keys changed, and when.
+  1,000+ downloads.
+- **Git Blend** - A commit's full diff, inline, the moment you hover a line.
+  Positioned as a fast, free, zero-config alternative to heavier,
+  subscription-gated blame views.
+- **Low End LLM** - Adaptive runtime for quantized LLMs on 4GB-RAM laptops.
+  Python, llama.cpp, GGUF, Q4_K_M.
+- **AI Coding Assistant** - Built from scratch in Java with an autonomous
+  agent loop for multi-step file read, write and run tasks. Java, OpenRouter API.
+- **Pulsar Classification Model** - Calibrated Random Forest for pulsar
+  detection on HTRU2 (~17,900 candidates, ~9% positive class). Probability
+  calibration (Platt/isotonic) validated via reliability diagrams and Brier
+  score; threshold from an explicit cost model rather than a default 0.5.
+  ROC-AUC ~0.97, recall ~0.90 at precision ~0.90 on held-out test data.
+
+## Skills
+
+- **Languages**: Python, Java, JavaScript, TypeScript, Go, SQL
+- **Technologies**: Redis, Git/GitHub Actions, VS Code Extension API, Chrome
+  Extension APIs, Oracle SQL, Microsoft Azure, Azure Machine Learning,
+  OpenRouter API, Docker Engine API, llama.cpp/GGUF
+
+## How the site is built
+
+One HTML file with the CSS inlined, plus js/data.js (all content) and
+js/main.js (the terminal). No frameworks, no bundler, no analytics, no cookies,
+no web fonts. Colour palette is Bliss green on near-black; the only surviving
+Windows XP artefact is a decorative title bar. Minesweeper and Snake are
+implemented in js/main.js and render directly into the output stream.
+
+Last updated: 2026

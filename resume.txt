@@ -1,0 +1,73 @@
+﻿Aditya Shaji
+============
+github.com/ps-aditya
+CS + AI/ML undergraduate - Mumbai, India
+
+SUMMARY
+=======
+
+Currently building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops.
+
+EXPERIENCE
+==========
+
+Founder - Low End LLM (Remote)   Jul 2026 - Present
+
+  * Building an adaptive runtime to run quantized LLMs locally on 4GB-RAM laptops, for developers without high-end GPUs who want a real, local taste of tools like Claude Code and Codex.
+  * Shipped real-time RAM/CPU/battery profiling and a per-turn safety floor that halts inference before memory exhaustion.
+  * Integrating quantized model loading (GGUF via llama.cpp, Q4_K_M, mmap-based weight loading) and a pre-flight capacity check.
+
+Creator & Maintainer - Redis State Explorer (Remote)   Jun 2026 - Present
+
+  * A VS Code extension that connects straight to Redis over the Engine API, with a live state panel and a diff timeline showing exactly which keys changed after a code save.
+  * 1,000+ downloads.
+  * Invited Reviewer - ISMIR 2026 (International Society for Music Information Retrieval).
+
+PROJECTS
+========
+
+Docker Vitals  [TypeScript, Docker Engine API, VS Code Extension API]  - shipped
+  Live Docker container monitoring inside VS Code.
+  * Connects directly to the Docker Engine API via dockerode and streams CPU, memory and network stats.
+  * Pushes container start/stop events in real time instead of polling.
+  * Compose-diff shows what changed in running containers the moment you save a docker-compose.yml or Dockerfile.
+
+Redis State Explorer  [TypeScript, Redis Engine API, VS Code Extension API]  - 1,000+ downloads
+  See which Redis keys changed, and when.
+  * Live state panel wired straight to Redis over the Engine API.
+  * Diff timeline showing exactly which keys changed after a code save.
+  * Invited Reviewer - ISMIR 2026.
+
+Git Blend  [TypeScript, Git, VS Code Extension API]  - built
+  A commit's full diff, inline, the moment you hover a line.
+  * Shows a commit's full diff inline on hover - not just blame attribution.
+  * A fast, free, zero-config alternative to heavier, subscription-gated blame views.
+
+Low End LLM  [Python, llama.cpp, GGUF, Q4_K_M]  - in progress
+  An adaptive runtime for quantized LLMs on 4GB-RAM laptops.
+  * Building an adaptive runtime to run quantized LLMs locally on 4GB-RAM laptops, for developers without high-end GPUs who want a real, local taste of tools like Claude Code and Codex.
+  * Shipped real-time RAM/CPU/battery profiling and a per-turn safety floor that halts inference before memory exhaustion.
+  * Integrating quantized model loading (GGUF via llama.cpp, Q4_K_M, mmap-based weight loading) and a pre-flight capacity check.
+
+AI Coding Assistant  [Java, OpenRouter API]  - built
+  Built from scratch in Java, with an autonomous agent loop.
+  * An AI coding assistant built from scratch in Java with an autonomous agent loop for multi-step file read, write and run tasks.
+
+Pulsar Classification Model  [Python, scikit-learn, pandas]  - ROC-AUC 0.97
+  Calibrated Random Forest for pulsar detection.
+  * Calibrated Random Forest on the HTRU2 dataset (~17,900 candidates, ~9% positive class).
+  * Probability calibration (Platt / isotonic) validated with reliability diagrams and Brier score.
+  * Decision threshold derived from an explicit cost model rather than a default 0.5 cutoff.
+  * ROC-AUC ~0.97 and recall ~0.90 at precision ~0.90 on held-out test data.
+
+EDUCATION
+=========
+
+Atlas SkillTech University - Mumbai, India   Aug 2025 - Aug 2029
+  B.Tech Computer Science - Artificial Intelligence & Machine Learning
+
+SKILLS
+======
+
+Languages: Python, Java, JavaScript, TypeScript, Go, SQL
+Technologies: Redis, Git / GitHub Actions, VS Code Extension API, Chrome Extension APIs, Oracle SQL, Microsoft Azure, Azure Machine Learning, OpenRouter API, Docker Engine API, llama.cpp / GGUF

@@ -1,120 +1,318 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="luna">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aditya Shaji - Windows XP Terminal</title>
-<meta name="description" content="The resume of Aditya Shaji (CS + AI/ML undergrad, builder of developer tools and local-first LLM runtimes) served as a Windows XP command prompt. Type help.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aditya Shaji - terminal portfolio</title>
+<meta name="description" content="Aditya Shaji - CS + AI/ML undergraduate building developer tools and local-first AI runtimes. Type 'help' in the terminal.">
 <meta name="author" content="Aditya Shaji">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#245edb">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23245edb'/%3E%3Cpath d='M7 10l6 6-6 6' stroke='%23fff' stroke-width='3.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h9' stroke='%23fff' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="css/xp.css">
-<link rel="stylesheet" href="css/windows.css">
-<link rel="stylesheet" href="css/terminal.css">
-<link rel="stylesheet" href="css/apps.css">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0c0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b0c0b'/%3E%3Cpath d='M7 10l5 5-5 5' stroke='%237ec850' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 21h9' stroke='%237ec850' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- JSON-LD: the machine-readable half. Costs nothing, does a lot for search. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aditya Shaji",
+  "url": "https://ps-aditya.github.io/portfolio/",
+  "jobTitle": "Software Developer",
+  "email": "mailto:you@example.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Mumbai", "addressCountry": "IN" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Atlas SkillTech University" },
+  "sameAs": [
+    "https://github.com/ps-aditya",
+    "https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE",
+    "https://x.com/YOUR-HANDLE"
+  ],
+  "knowsAbout": [
+    "Python", "Java", "TypeScript", "Go", "SQL",
+    "Large Language Models", "Quantization", "llama.cpp",
+    "VS Code Extension API", "Redis", "Docker", "scikit-learn"
+  ]
+}
+</script>
+
+<style>
+/* ---------------------------------------------------------------------------
+   Everything is inline. One document, no render-blocking request, no web fonts.
+   The palette is Bliss green on near-black; the topbar is the only XP remnant.
+   ------------------------------------------------------------------------ */
+:root{
+  --bg:#0b0c0b;
+  --bg-2:#121412;
+  --fg:#c8cfc6;
+  --fg-hi:#eef4ea;
+  --fg-dim:#788075;
+  --fg-dimmer:#4d534b;
+  --acc:#7ec850;          /* Bliss green */
+  --acc-dim:#3f6b26;
+  --warn:#d9c25a;         /* Rover yellow */
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font:15px/1.55 var(--mono);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--acc-dim);color:#fff}
+:focus-visible{outline:1px dotted var(--acc);outline-offset:2px}
+
+/* ---------- the one nostalgic bit: a decorative XP title bar ---------------- */
+#topbar{
+  flex:none;display:flex;align-items:center;gap:8px;
+  height:26px;padding:0 6px;
+  background:linear-gradient(90deg,#000080,#1084d0);
+  color:#fff;font:700 12px/1 Tahoma,"Segoe UI",Verdana,sans-serif;
+  text-shadow:1px 1px 1px rgba(0,0,0,.4);
+}
+#topbar .t-title{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#topbar .t-btns{display:flex;gap:2px;flex:none}
+#topbar .t-btn{
+  width:18px;height:16px;padding:0;display:grid;place-items:center;
+  background:#d4d0c8;border:1px solid #fff;box-shadow:inset -1px -1px 0 #808080;
+  color:#000;font:700 9px/1 Tahoma,sans-serif;
+}
+#topbar svg{display:block}
+
+/* ---------- terminal ------------------------------------------------------ */
+#screen{
+  flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
+  padding:18px 20px 8px;scrollbar-width:thin;scrollbar-color:#2e352c var(--bg);
+}
+#screen::-webkit-scrollbar{width:10px}
+#screen::-webkit-scrollbar-track{background:var(--bg)}
+#screen::-webkit-scrollbar-thumb{background:#2e352c;border-radius:5px}
+
+p{margin:0 0 12px}
+a{color:var(--acc);text-decoration:none;border-bottom:1px solid rgba(126,200,80,.3)}
+a:hover{color:var(--fg-hi);border-bottom-color:var(--acc)}
+b,strong{color:var(--fg-hi);font-weight:700}
+
+.lbl{
+  display:block;color:var(--fg-dimmer);letter-spacing:.14em;
+  text-transform:uppercase;font-size:11px;margin:22px 0 8px;
+}
+.lbl:first-child{margin-top:0}
+
+/* greeting header */
+.head{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.head .rover{flex:none;margin-top:2px}
+.head h1{font-size:19px;color:var(--fg-hi);margin:0 0 2px;font-weight:700;letter-spacing:-.01em}
+.head .role{color:var(--fg);margin:0 0 3px}
+.head .meta{color:var(--fg-dimmer);font-size:12px;margin:0}
+
+/* command index */
+.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px 26px;max-width:1000px}
+.rows .r{display:flex;gap:8px;align-items:baseline;padding:1px 0}
+.rows .c{flex:none;color:var(--acc)}
+.rows .o{color:var(--fg-dimmer)}
+.rows .d{color:var(--fg-dim);font-size:13px}
+
+/* generic printed output */
+.line{white-space:pre-wrap;word-break:break-word;min-height:1.55em}
+.wrap{white-space:normal}
+.dim{color:var(--fg-dim)}
+.dimmer{color:var(--fg-dimmer)}
+.hi{color:var(--fg-hi)}
+.acc{color:var(--acc)}
+.warn{color:var(--warn)}
+.entry{margin:0 0 10px}
+.entry .t{color:var(--fg-hi);font-weight:700}
+.entry .m{color:var(--fg-dimmer);font-size:13px}
+.entry .d{color:var(--fg-dim);font-size:13px;padding-left:2ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px 24px;max-width:900px}
+.rule{color:var(--fg-dimmer);margin:16px 0 8px}
+.nowline{color:var(--fg)}
+
+/* ---------- fixed prompt row --------------------------------------------- */
+#bar{
+  flex:none;display:flex;gap:8px;align-items:center;
+  padding:10px 20px 14px;background:var(--bg);
+  border-top:1px solid #1a1d18;
+}
+#who{color:var(--acc);white-space:pre;flex:none}
+#prompt{color:var(--fg-hi);white-space:pre;flex:none}
+#input{
+  flex:1 1 1ch;min-width:1ch;
+  margin:0;padding:0;border:0;background:transparent;outline:none;
+  color:var(--fg-hi);font:inherit;caret-color:var(--acc);caret-shape:square;
+}
+
+/* ---------- games, rendered straight into the output ----------------------- */
+.ms{display:grid;gap:1px;width:max-content;margin:6px 0 10px;user-select:none}
+.ms button{
+  width:2.1ch;height:1.5em;padding:0;border:0;background:transparent;
+  color:var(--fg-dim);font:inherit;cursor:pointer;
+}
+.ms button:hover{color:var(--acc)}
+.ms button[aria-pressed="true"]{color:var(--warn)}
+.ms .o{border:1px solid #1a1d18}
+.ms .o1{color:#6fa8ff}.ms .o2{color:#7ec850}.ms .o3{color:#e06c6c}
+.ms .o4{color:#c58ce8}.ms .o5{color:#d9c25a}.ms .o6{color:#5fd0c8}
+.ms .o7{color:var(--fg-hi)}.ms .o8{color:var(--fg-dimmer)}
+.ms .boom{color:#ff6b6b}
+.ms-hint{color:var(--fg-dimmer);font-size:13px}
+
+.snake{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin:6px 0 10px}
+.snake pre{margin:0;color:var(--acc);line-height:1.1;letter-spacing:.02em}
+.snake .pad{display:grid;grid-template-columns:repeat(3,34px);grid-auto-rows:32px;gap:3px}
+.snake .pad button{
+  border:1px solid #1a1d18;background:var(--bg-2);color:var(--fg-dim);
+  font:inherit;border-radius:3px;cursor:pointer;
+}
+.snake .pad button:active{background:var(--acc-dim);color:#fff}
+
+/* ---------- no-JS fallback ------------------------------------------------- */
+.noscript{padding:24px 20px 40px;max-width:760px}
+.noscript h2{font-size:14px;color:var(--fg-hi);margin:24px 0 8px;letter-spacing:.02em}
+.noscript ul{padding-left:20px;margin:0 0 12px}
+.noscript li{margin-bottom:4px}
+.noscript pre{white-space:pre-wrap;background:var(--bg-2);padding:14px;border-radius:4px;overflow-x:auto}
+
+@media (max-width:640px){
+  body{font-size:13.5px}
+  #screen{padding:14px 12px 6px}
+  #bar{padding:8px 12px 12px}
+  #who{display:none}          /* keep it short: aditya@portfolio:~$ on a phone */
+  .head .rover{display:none}
+  .rows{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 
-<!-- ===================== POST / BOOT BIOS ===================== -->
-<div id="bios" class="stage" role="status" aria-live="polite" aria-label="System boot"></div>
-
-<!-- ===================== SPLASH + PROGRESS ===================== -->
-<div id="splash" class="stage" hidden>
-  <div class="splash-inner">
-    <div class="splash-brand">
-      <svg class="splash-logo" viewBox="0 0 100 100" aria-hidden="true">
-        <g transform="rotate(4 50 50)">
-          <rect x="8" y="10" width="40" height="38" rx="3" fill="#f25022"/>
-          <rect x="52" y="10" width="40" height="38" rx="3" fill="#7fba00"/>
-          <rect x="8" y="52" width="40" height="38" rx="3" fill="#00a4ef"/>
-          <rect x="52" y="52" width="40" height="38" rx="3" fill="#ffb900"/>
-        </g>
-      </svg>
-      <div class="splash-word">Windows<span style="font-style:italic">xp</span>
-        <div class="splash-sub">Professional</div>
-      </div>
-    </div>
-    <div class="splash-bar" id="splash-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-    <div class="splash-caption" id="splash-caption">Starting Windows...</div>
-  </div>
-  <div class="splash-skip">press any key to skip</div>
+<!-- ===================== decorative XP title bar ===================== -->
+<div id="topbar" aria-hidden="true">
+  <span class="t-title">Aditya Shaji - C:\Documents and Settings\Aditya\portfolio</span>
+  <span class="t-btns">
+    <span class="t-btn" title="minimise"><svg width="8" height="8" viewBox="0 0 8 8"><rect x="0" y="5" width="8" height="2" fill="#000"/></svg></span>
+    <span class="t-btn" title="maximise"><svg width="8" height="8" viewBox="0 0 8 8"><rect x="0.5" y="0.5" width="7" height="7" fill="none" stroke="#000" stroke-width="1"/><rect x="0.5" y="0.5" width="7" height="2" fill="#000"/></svg></span>
+    <span class="t-btn" title="close"><svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 1l6 6M7 1L1 7" stroke="#000" stroke-width="1.6"/></svg></span>
+  </span>
 </div>
 
-<!-- ===================== WELCOME / LOG ON ===================== -->
-<div id="logon" class="stage" hidden>
-  <div class="logon-box">
-    <p class="logon-hello">Welcome</p>
-    <p class="logon-hint">To begin, click your user name</p>
-    <button class="logon-user" id="logon-user" type="button">
-      <svg class="avatar" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="4" fill="#dfe8fb"/>
-        <circle cx="32" cy="24" r="11" fill="#3a5f9e"/>
-        <path d="M10 60c0-13 10-21 22-21s22 8 22 21z" fill="#3a5f9e"/>
-      </svg>
-      <span id="logon-name">Aditya Shaji</span>
-    </button>
-    <div class="logon-opt">
-      <input type="checkbox" id="logon-sound" checked>
-      <label for="logon-sound">Play the startup sound</label>
-    </div>
-  </div>
-  <div class="logon-foot">xp://terminal &nbsp;&middot;&nbsp; built with vanilla HTML, CSS &amp; JavaScript</div>
-</div>
-
-<!-- ===================== DESKTOP ===================== -->
-<div id="desktop">
-  <div id="wallpaper" aria-hidden="true"></div>
-
-  <div id="icon-layer" role="list" aria-label="Desktop icons"></div>
-
-  <div id="window-layer"></div>
-
-  <div id="taskbar">
-    <button id="start-button" type="button" aria-haspopup="true" aria-expanded="false">
-      <svg class="start-mark" viewBox="0 0 100 100" aria-hidden="true">
-        <g transform="rotate(4 50 50)">
-          <rect x="8" y="10" width="40" height="38" rx="3" fill="#f25022"/>
-          <rect x="52" y="10" width="40" height="38" rx="3" fill="#7fba00"/>
-          <rect x="8" y="52" width="40" height="38" rx="3" fill="#00a4ef"/>
-          <rect x="52" y="52" width="40" height="38" rx="3" fill="#ffb900"/>
-        </g>
-      </svg>
-      <span>start</span>
-    </button>
-
-    <div id="task-buttons"></div>
-
-    <div id="tray">
-      <button class="tray-icon" id="tray-sound" type="button" title="Sound" aria-label="Toggle sound"></button>
-      <button class="tray-icon is-optional" id="tray-net" type="button" title="Network" aria-label="Network status"></button>
-      <span id="clock" title="">--:--</span>
-      <button id="show-desktop" type="button" title="Show Desktop" aria-label="Show desktop"></button>
+<!-- ===================== terminal ===================== -->
+<main id="screen" tabindex="-1">
+  <div class="head">
+    <!-- Rover. Because of course. -->
+    <svg class="rover" width="44" height="44" viewBox="0 0 64 64" aria-hidden="true">
+      <ellipse cx="32" cy="59" rx="18" ry="2.4" fill="#000" opacity=".28"/>
+      <!-- tail -->
+      <path d="M42 46c6 1 8 7 5 11-2 3-6 3-7 0 3-3 4-7 2-11z" fill="#c98f22"/>
+      <!-- body -->
+      <ellipse cx="33" cy="45" rx="13" ry="14" fill="#f2c043"/>
+      <path d="M25 40c-1.5 6-1.5 12 0 17h15c1.5-6 1.5-12 0-17z" fill="#e5b02f"/>
+      <rect x="25" y="49" width="4.5" height="9" rx="2.2" fill="#f7d163"/>
+      <rect x="31.5" y="49" width="4.5" height="9" rx="2.2" fill="#f7d163"/>
+      <!-- head -->
+      <circle cx="27" cy="25" r="12" fill="#f5c542"/>
+      <!-- floppy ear, hanging down the near side -->
+      <ellipse cx="35" cy="23" rx="5.5" ry="10" fill="#a9701f" transform="rotate(14 35 23)"/>
+      <!-- snout -->
+      <ellipse cx="15.5" cy="29" rx="8.5" ry="6.5" fill="#fad85f"/>
+      <ellipse cx="9" cy="27.5" rx="2.9" ry="2.5" fill="#2a1f10"/>
+      <path d="M12 32q4.5 3.5 8 .5" fill="none" stroke="#a9701f" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- eye -->
+      <circle cx="26" cy="23" r="2.5" fill="#2a1f10"/>
+      <circle cx="26.9" cy="22.1" r="1" fill="#fff"/>
+    </svg>
+    <div>
+      <h1>Aditya Shaji</h1>
+      <p class="role">CS + AI/ML undergraduate &middot; Mumbai, India</p>
+      <p class="meta">portfolio v1.0.0 &middot; hand written html, css &amp; js &middot; no frameworks, no build step, no trackers</p>
     </div>
   </div>
 
-  <div id="start-menu" role="menu" aria-label="Start menu"></div>
-  <div id="context-menu" role="menu"></div>
-  <div id="drag-ghost" aria-hidden="true"></div>
+  <p>Type <b>help</b> to see the list of available commands.</p>
+
+  <span class="lbl">Currently</span>
+  <p class="nowline">building <b>Low&nbsp;End&nbsp;LLM</b> - a runtime that runs quantized LLMs on 4GB-RAM laptops.</p>
+
+  <span class="lbl">Available commands</span>
+  <div class="rows">
+    <div class="r"><a class="c" data-cmd="who" href="#who">[who]</a> <span class="o">or</span> <a class="c" data-cmd="w" href="#w">[w]</a> <span class="d">who I am</span></div>
+    <div class="r"><a class="c" data-cmd="skills" href="#skills">[skills]</a> <span class="o">or</span> <a class="c" data-cmd="s" href="#s">[s]</a> <span class="d">languages &amp; tools</span></div>
+    <div class="r"><a class="c" data-cmd="projects" href="#projects">[projects]</a> <span class="o">or</span> <a class="c" data-cmd="pj" href="#pj">[pj]</a> <span class="d">things I have built</span></div>
+    <div class="r"><a class="c" data-cmd="misc" href="#misc">[misc]</a> <span class="d">experience &amp; education</span></div>
+    <div class="r"><a class="c" data-cmd="games" href="#games">[games]</a> <span class="o">or</span> <a class="c" data-cmd="g" href="#g">[g]</a> <span class="d">a couple of distractions</span></div>
+    <div class="r"><a class="c" data-cmd="blog" href="#blog">[blog]</a> <span class="o">or</span> <a class="c" data-cmd="b" href="#b">[b]</a> <span class="d">what I am into</span></div>
+    <div class="r"><a class="c" data-cmd="resume" href="#resume">[resume]</a> <span class="o">or</span> <a class="c" data-cmd="cv" href="#cv">[cv]</a> <span class="d">everything, as text</span></div>
+    <div class="r"><a class="c" data-cmd="clear" href="#clear">[clear]</a> <span class="d">wipe the screen</span></div>
+  </div>
+
+  <span class="lbl">Contact</span>
+  <div>
+    <a data-ext="mailto:you@example.com" href="mailto:you@example.com">[email]</a> &nbsp;
+    <a data-ext href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE">[linkedin]</a> &nbsp;
+    <a data-ext href="https://x.com/YOUR-HANDLE">[twitter]</a> &nbsp;
+    <a data-ext href="https://github.com/ps-aditya">[github]</a>
+  </div>
+</main>
+
+<!-- ===================== prompt ===================== -->
+<div id="bar">
+  <span id="who" aria-hidden="true">aditya@portfolio</span><span id="prompt" aria-hidden="true">:~$</span>
+  <label class="sr-only" for="input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Command</label>
+  <input id="input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Command input" autofocus>
 </div>
 
-<div id="tooltip" role="tooltip"></div>
+<!-- ===================== no-JS fallback ===================== -->
+<noscript>
+  <style>
+    /* with scripting off there is no terminal, so drop the shell and let the
+       page scroll like an ordinary document */
+    #screen,#bar{display:none}
+    body{height:auto;overflow:auto;display:block}
+  </style>
+  <div class="noscript">
+    <h2>This portfolio is a terminal, and JavaScript is off.</h2>
+    <p>So here is the same thing in plain text. The full version is at
+      <a href="resume.txt">resume.txt</a>, and a machine-readable summary at
+      <a href="llms.txt">llms.txt</a>.</p>
 
-<!-- load order matters: no modules, so index.html works over file:// too -->
-<script src="js/data.js"></script>
-<script src="js/icons.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/wm.js"></script>
-<script src="js/fs.js"></script>
-<script src="js/shell.js"></script>
-<script src="js/apps/terminal.js"></script>
-<script src="js/apps/explorer.js"></script>
-<script src="js/apps/notepad.js"></script>
-<script src="js/apps/browser.js"></script>
-<script src="js/apps/minesweeper.js"></script>
-<script src="js/apps/misc.js"></script>
-<script src="js/boot.js"></script>
-<script src="js/main.js"></script>
+    <h2>Aditya Shaji</h2>
+    <p>CS + AI/ML undergraduate at Atlas SkillTech University, Mumbai, India. I build
+      developer tools and local-first AI runtimes.</p>
 
+    <h2>Experience</h2>
+    <ul>
+      <li><b>Founder, Low End LLM</b> (Remote, Jul 2026 - Present) - an adaptive runtime that runs quantized LLMs on 4GB-RAM laptops.</li>
+      <li><b>Creator &amp; Maintainer, Redis State Explorer</b> (Remote, Jun 2026 - Present) - a VS Code extension with live Redis state and a key-diff timeline. 1,000+ downloads. Invited Reviewer, ISMIR 2026.</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <ul>
+      <li><b>Docker Vitals</b> - live Docker container monitoring in VS Code.</li>
+      <li><b>Redis State Explorer</b> - see which Redis keys changed, and when.</li>
+      <li><b>Git Blend</b> - a commit's full diff, inline, on hover.</li>
+      <li><b>Low End LLM</b> - quantized LLMs on 4GB-RAM laptops.</li>
+      <li><b>AI Coding Assistant</b> - built from scratch in Java, with an agent loop.</li>
+      <li><b>Pulsar Classification Model</b> - calibrated Random Forest, ROC-AUC ~0.97.</li>
+    </ul>
+
+    <h2>Skills</h2>
+    <p>Python, Java, JavaScript, TypeScript, Go, SQL - Redis, Git/GitHub Actions,
+      VS Code Extension API, Chrome Extension APIs, Oracle SQL, Azure, Azure ML,
+      OpenRouter API, Docker Engine API, llama.cpp/GGUF.</p>
+
+    <h2>Contact</h2>
+    <ul>
+      <li><a href="https://github.com/ps-aditya">github.com/ps-aditya</a></li>
+      <li><a href="mailto:you@example.com">email</a></li>
+    </ul>
+  </div>
+</noscript>
+
+<!-- deferred so the browser can paint the greeting before touching JS -->
+<script defer src="js/data.js"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>
