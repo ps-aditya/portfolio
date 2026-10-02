@@ -1,0 +1,6 @@
+﻿# nothing to build - the site is the repo
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

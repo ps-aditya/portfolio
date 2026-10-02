@@ -1,0 +1,676 @@
+/* =============================================================================
+ *  xp.css — theme tokens, desktop, taskbar, start menu, boot & logon screens
+ * ========================================================================== */
+
+/* ------------------------------- tokens ---------------------------------- */
+:root {
+  --luna:          #245edb;
+  --luna-dark:     #1941a5;
+  --luna-deep:     #0b2e80;
+  --luna-light:    #4a94ff;
+  --luna-pale:     #dfe8fb;
+
+  --face:          #ece9d8;
+  --face-light:    #f7f5ea;
+  --face-shadow:   #d4d0c0;
+
+  --ink:           #000;
+  --ink-soft:      #3c3c3c;
+  --ink-disabled:  #9a9a8f;
+  --gray-text:     #aca899;
+
+  --title-a1:      #0997ff;
+  --title-a2:      #0053e0;
+  --title-a3:      #0668de;
+  --title-i1:      #7b9bdb;
+  --title-i2:      #6c8ec6;
+  --title-i3:      #6185bd;
+  --title-i4:      #5c7cb0;
+
+  --tb-btn-top:    #4a94ff;
+  --tb-btn-bot:    #1a4dbe;
+  --tb-btn-edge:   #10389c;
+
+  --tb-bg:
+    linear-gradient(180deg,
+      #3168d5 0%, #245edb 8%, #245edb 10%, #2358c9 14%,
+      #2151bd 18%, #2049b2 22%, #2049b2 26%, #1f45a9 30%,
+      #1f43a7 42%, #1e42a4 56%, #1e41a2 70%, #2045a5 82%,
+      #2456b8 90%, #2d69d3 95%, #3b7ade 98%, #4a8ce4 100%);
+  --tb-border: #16429e;
+  --tray-bg: linear-gradient(180deg, #1290e9 0%, #19a0f0 12%, #19a0f0 88%, #0f7fd0 100%);
+
+  --start-bg:
+    linear-gradient(180deg, #56a8f2 0%, #3a8fe6 8%, #3184e1 20%, #2a7ad9 30%,
+                     #266ad0 45%, #215dc5 65%, #1e55b8 85%, #1e50b2 95%, #2c72d4 100%);
+  --start-open: linear-gradient(180deg, #123f9c 0%, #1a4aa8 40%, #1f4fb5 100%);
+  --show-desktop-bg: linear-gradient(180deg, #1ba0ef, #0e83d6);
+
+  --btn-face:      #ece9d8;
+  --btn-hi:        #ffffff;
+  --btn-lo:        #aca899;
+  --btn-ink:       #003c74;
+
+  --window-bg:     #ffffff;
+  --shadow-strong: rgba(0, 0, 0, .55);
+  --shadow-soft:   rgba(0, 0, 0, .28);
+
+  --font-ui: Tahoma, "Segoe UI", Verdana, Geneva, sans-serif;
+  --font-mono: Consolas, "Lucida Console", "Courier New", monospace;
+
+  --taskbar-h: 30px;
+  --titlebar-h: 29px;
+
+  --font-icon: "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", sans-serif;
+}
+
+/* Bliss variant: swap the accent ramp for green, keep everything else. */
+html[data-theme="bliss"] {
+  --luna:          #1f7a2e;
+  --luna-dark:     #145c22;
+  --luna-deep:     #0b3d15;
+  --luna-light:    #4fbb63;
+  --luna-pale:     #e2f0e4;
+
+  --title-a1:      #8ddc9a;
+  --title-a2:      #2b8a3d;
+  --title-a3:      #3fa14f;
+  --title-i1:      #9fbfa4;
+  --title-i2:      #8fae93;
+  --title-i3:      #7f9f84;
+  --title-i4:      #739376;
+
+  --tb-btn-top:    #4fbb63;
+  --tb-btn-bot:    #20692c;
+  --tb-btn-edge:   #14491d;
+
+  --tb-bg:
+    linear-gradient(180deg,
+      #3f9c53 0%, #2f8c40 8%, #2f8c40 10%, #2a7f39 14%,
+      #26762f 18%, #216b28 22%, #216b28 26%, #1d6124 30%,
+      #1c5c22 42%, #1a5620 56%, #1a5420 70%, #1e5a23 82%,
+      #246b2b 90%, #2e7f38 95%, #3d944a 98%, #4aa857 100%);
+  --tb-border: #14491d;
+  --tray-bg: linear-gradient(180deg, #35b355 0%, #3ec566 12%, #3ec566 88%, #2b9a48 100%);
+
+  --start-bg:
+    linear-gradient(180deg, #6fd188 0%, #4cc06c 10%, #42b25f 25%, #37a453 45%,
+                     #2f9348 65%, #28843d 85%, #267e39 95%, #3d9e54 100%);
+  --start-open: linear-gradient(180deg, #14501f 0%, #1c5f2c 40%, #226b33 100%);
+  --show-desktop-bg: linear-gradient(180deg, #4fd47f, #2fa85c);
+
+  --btn-ink:       #145c22;
+}
+
+/* ------------------------------- reset ----------------------------------- */
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--ink);
+  background: #000;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+button { cursor: default; }
+:focus-visible { outline: 1px dotted #000; outline-offset: -3px; }
+
+::selection { background: #0a246a; color: #fff; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* XP-style button, used all over the shell. */
+.xp-btn {
+  border: 1px solid var(--btn-lo);
+  border-top-color: #fff;
+  border-left-color: #fff;
+  background: linear-gradient(180deg, #fff 0%, var(--face) 45%, #dcd8c8 100%);
+  padding: 3px 12px;
+  min-width: 75px;
+  color: var(--btn-ink);
+  font-weight: bold;
+  text-align: center;
+}
+.xp-btn:active {
+  border-color: var(--btn-lo);
+  border-top-color: #808080;
+  border-left-color: #808080;
+  background: var(--face);
+  padding: 4px 11px 2px 13px;
+}
+.xp-btn[disabled] { color: var(--gray-text); text-shadow: 1px 1px 0 #fff; }
+
+/* ----------------------------- stage / boot ------------------------------- */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* author `display` beats the UA's [hidden] rule, so restate it */
+.stage[hidden] { display: none !important; }
+
+#bios {
+  background: #000;
+  color: #d8d8d8;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 24px;
+  white-space: pre-wrap;
+}
+#bios .bios-dim   { color: #7a7a7a; }
+#bios .bios-ok    { color: #d8d8d8; }
+#bios .bios-key   { color: #d8d8d8; }
+#bios .bios-fail  { color: #c0c0c0; }
+#bios .bios-spacer { height: 1.1em; }
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9100;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+#splash .splash-inner {
+  position: relative;
+  width: min(420px, 78vw);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+#splash .splash-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+#splash .splash-logo { width: 92px; height: 92px; }
+#splash .splash-word {
+  color: #fff;
+  font-size: 34px;
+  font-weight: bold;
+  letter-spacing: .5px;
+  text-shadow: 2px 2px 0 #4b7fd4;
+}
+#splash .splash-sub {
+  position: absolute;
+  bottom: -16px;
+  left: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+#splash .splash-bar {
+  position: relative;
+  height: 20px;
+  border-radius: 12px;
+  background: #000;
+  border: 2px solid #4b7fd4;
+  overflow: hidden;
+}
+#splash .splash-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: var(--fill, 0%);
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,.28) 0 10px, transparent 10px 20px),
+    linear-gradient(90deg, #1e57d8 0%, #1e57d8 55%, #55a0ff 100%);
+  transition: width .28s linear;
+}
+#splash .splash-caption {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+#splash .splash-skip {
+  position: fixed;
+  bottom: 14px;
+  right: 18px;
+  color: #7a7a7a;
+  font-size: 11px;
+}
+
+/* ------------------------------ logon ------------------------------------ */
+#logon {
+  background:
+    radial-gradient(120% 90% at 50% 40%, #2f6fd8 0%, #123a86 55%, #06183d 100%);
+  flex-direction: column;
+  gap: 26px;
+  cursor: pointer;
+}
+#logon::before {
+  /* faint Bliss-ish horizon so the welcome screen isn't a flat wash */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(28, 84, 40, .0), rgba(23, 74, 36, .55));
+}
+#logon .logon-box {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+}
+#logon .logon-hello {
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, .6);
+  margin: 0 0 6px;
+}
+#logon .logon-hint {
+  font-size: 13px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .7);
+  margin: 0 0 22px;
+  opacity: .92;
+}
+#logon .logon-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 22px 10px 14px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+}
+#logon .logon-user .avatar { width: 54px; height: 54px; }
+#logon .logon-user:hover { background: rgba(255, 255, 255, .24); }
+#logon .logon-user:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+#logon .logon-foot {
+  position: absolute;
+  bottom: 18px;
+  left: 0; right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, .72);
+  font-size: 11px;
+  z-index: 1;
+}
+#logon .logon-opt {
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+  color: #dbe6ff;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .6);
+}
+
+/* fade helpers */
+.stage.is-leaving { animation: stageOut .45s ease forwards; }
+@keyframes stageOut { to { opacity: 0; visibility: hidden; } }
+
+.stage.is-entering { animation: stageIn .5s ease both; }
+@keyframes stageIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ------------------------------ desktop ---------------------------------- */
+#desktop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: var(--luna);
+}
+#desktop.is-live { display: block; }
+
+/* blurred blue wallpaper, close to the XP default without shipping a bitmap */
+#wallpaper {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 55% at 22% 24%, rgba(255, 255, 255, .40) 0%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(58% 48% at 78% 70%, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(46% 40% at 62% 20%, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, 0) 66%),
+    linear-gradient(160deg, #4a9bff 0%, #2a6ae2 34%, #1b4fc4 62%, #123a9a 100%);
+}
+html[data-theme="bliss"] #wallpaper {
+  background:
+    radial-gradient(70% 55% at 26% 26%, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, #8ed0ff 0%, #bfe3ff 46%, #7cc36a 52%, #3f8f3a 74%, #22692c 100%);
+}
+#wallpaper::after {
+  /* XP "subtle" desktop cleanup hint, faded out */
+  content: "right-click to see options";
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  color: rgba(255, 255, 255, .55);
+  font-size: 11px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+  animation: hintFade 9s ease 4s forwards;
+}
+@keyframes hintFade { to { opacity: 0; } }
+
+#window-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: var(--taskbar-h);
+  overflow: hidden;
+}
+
+#icon-layer {
+  position: absolute;
+  inset: 0 0 var(--taskbar-h) 0;
+  padding: 8px 6px;
+}
+
+.xp-icon {
+  width: 78px;
+  padding: 4px 2px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  text-align: center;
+  user-select: none;
+  background: transparent;
+  border: 1px dotted transparent;
+  border-radius: 1px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+}
+.xp-icon img, .xp-icon svg { width: 36px; height: 36px; pointer-events: none; }
+.xp-icon .xp-icon-label {
+  font-size: 11px;
+  line-height: 1.25;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .75);
+  word-break: break-word;
+}
+.xp-icon:hover { color: #ffef9c; }
+.xp-icon.is-selected {
+  border-color: rgba(11, 63, 190, .95);
+  background: rgba(52, 103, 219, .55);
+}
+.xp-icon.is-selected .xp-icon-label { text-shadow: none; }
+
+/* ------------------------------ taskbar ---------------------------------- */
+#taskbar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: var(--taskbar-h);
+  display: flex;
+  align-items: stretch;
+  z-index: 6000;
+  background: var(--tb-bg);
+  border-top: 1px solid var(--tb-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
+}
+
+#start-button {
+  width: 98px;
+  border: 0;
+  border-radius: 0 8px 8px 0;
+  padding: 0 0 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--start-bg);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .55);
+  text-align: left;
+  flex: none;
+}
+#start-button .start-mark { width: 21px; height: 21px; flex: none; }
+#start-button:hover { filter: brightness(1.08); }
+#start-button.is-open {
+  background: var(--start-open);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, .45);
+}
+
+#task-buttons {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 4px 2px;
+  overflow: hidden;
+}
+
+.task-btn {
+  flex: 0 1 158px;
+  min-width: 40px;
+  height: 23px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 6px;
+  border: 1px solid var(--tb-btn-edge);
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--tb-btn-top) 0%, var(--tb-btn-bot) 88%, #143d9c 100%);
+  color: #fff;
+  font-size: 11px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.task-btn img, .task-btn svg { width: 15px; height: 15px; flex: none; }
+.task-btn .task-btn-label { overflow: hidden; text-overflow: ellipsis; }
+.task-btn:hover { filter: brightness(1.12); }
+.task-btn.is-active {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.10) 0 3px, transparent 3px 7px),
+    linear-gradient(180deg, #1a4bb0 0%, #2456c2 40%, #2f62d2 100%);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .45);
+  font-weight: bold;
+}
+
+#tray {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 0 10px;
+  background: var(--tray-bg);
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, .18);
+  color: #fff;
+}
+#tray .tray-icon {
+  width: 17px; height: 17px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+#tray .tray-icon svg { width: 16px; height: 16px; }
+#tray .tray-icon:hover { filter: brightness(1.2); }
+#tray .tray-icon.is-off { opacity: .55; }
+#tray #clock {
+  font-size: 11px;
+  min-width: 56px;
+  text-align: center;
+  color: #fff;
+}
+#show-desktop {
+  width: 10px;
+  flex: none;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, .55);
+  background: var(--show-desktop-bg);
+}
+#show-desktop:hover { background: var(--start-bg); }
+
+/* --------------------------- start menu ---------------------------------- */
+#start-menu {
+  position: absolute;
+  left: 2px;
+  bottom: var(--taskbar-h);
+  z-index: 6200;
+  width: 380px;
+  display: none;
+  background: var(--face);
+  border: 1px solid #7a9db9;
+  border-bottom: 0;
+  box-shadow: 3px -3px 10px rgba(0, 0, 0, .35);
+  color: var(--ink);
+}
+#start-menu.is-open { display: flex; }
+#start-menu .sm-back {
+  width: 21px;
+  flex: none;
+  margin: 6px 4px 6px 3px;
+  background: linear-gradient(90deg, #2a71dd 0%, #4a94e8 40%, #8fc0f2 100%);
+}
+#start-menu .sm-body { flex: 1 1 auto; padding: 5px 0 0; min-width: 0; }
+#start-menu .sm-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 10px 7px;
+  border-bottom: 1px solid #c6c2ae;
+}
+#start-menu .sm-head .avatar {
+  width: 42px; height: 42px; flex: none;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px #9aa8b8;
+  background: #fff;
+}
+#start-menu .sm-head .sm-user { font-size: 15px; font-weight: bold; color: var(--btn-ink); }
+#start-menu .sm-head .sm-sub { font-size: 11px; color: #555; margin-top: 2px; }
+
+#start-menu .sm-items { padding: 5px 6px 3px; }
+#start-menu .sm-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: linear-gradient(180deg, #d6e4fb 0%, #b9d0f5 100%);
+  border-top: 1px solid #fff;
+}
+#start-menu .sm-footer button {
+  width: 28px; height: 26px;
+  border: 1px solid transparent;
+  background: transparent;
+  display: grid; place-items: center;
+  border-radius: 3px;
+}
+#start-menu .sm-footer button:hover { border-color: #7ba0d8; background: rgba(255,255,255,.5); }
+#start-menu .sm-footer svg { width: 17px; height: 17px; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 7px;
+  font-size: 11px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.menu-item svg, .menu-item img { width: 26px; height: 26px; flex: none; }
+.menu-item .mi-arrow { margin-left: auto; font-size: 10px; color: #666; }
+.menu-item.is-highlight { background: var(--luna); color: #fff; }
+.menu-item.is-highlight .mi-arrow { color: #fff; }
+.menu-item.is-disabled { color: var(--gray-text); }
+.menu-sep { height: 1px; background: #c9c5b1; margin: 3px 4px; }
+
+/* --------------------------- context menu -------------------------------- */
+#context-menu {
+  position: absolute;
+  z-index: 6400;
+  min-width: 190px;
+  padding: 2px;
+  display: none;
+  background: var(--face);
+  border: 1px solid #7a9db9;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, .35);
+}
+#context-menu.is-open { display: block; }
+#context-menu .menu-item svg, #context-menu .menu-item img { width: 20px; height: 20px; }
+.menu-item .mi-label { display: flex; flex-direction: column; gap: 1px; }
+.menu-item .mi-label .mi-sub { font-size: 10px; color: #777; }
+.menu-item.is-highlight .mi-label .mi-sub { color: #d7e3ff; }
+.menu-item .mi-check { width: 14px; flex: none; text-align: center; }
+
+/* --------------------------- drag / marquee ------------------------------ */
+#drag-ghost {
+  position: absolute;
+  z-index: 6500;
+  pointer-events: none;
+  border: 2px dotted rgba(255, 255, 255, .9);
+  background: rgba(58, 117, 214, .28);
+  display: none;
+}
+
+/* ------------------------------ tooltips --------------------------------- */
+#tooltip {
+  position: fixed;
+  z-index: 7000;
+  max-width: 240px;
+  padding: 3px 7px;
+  background: #ffffe1;
+  border: 1px solid #000;
+  font-size: 11px;
+  color: #000;
+  pointer-events: none;
+  display: none;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+
+/* ------------------------- reduced motion / phone ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  #wallpaper::after { display: none; }
+}
+
+@media (max-width: 520px) {
+  :root { --taskbar-h: 44px; }
+  #start-button { width: 62px; padding-left: 20px; font-size: 0; gap: 0; }
+  #start-button .start-mark { width: 24px; height: 24px; }
+  #task-buttons { padding: 6px; }
+  .task-btn { flex-basis: 42px; height: 32px; justify-content: center; }
+  .task-btn .task-btn-label { display: none; }
+  #tray .tray-icon.is-optional { display: none; }
+  #tray { gap: 6px; padding: 0 5px 0 8px; }
+  #tray #clock { min-width: 68px; }
+  #start-menu { width: calc(100vw - 4px); left: 2px; }
+  #start-menu .sm-back { width: 26px; }
+  .xp-icon { width: 70px; }
+  #wallpaper::after { display: none; }
+}

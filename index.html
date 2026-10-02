@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luna">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aditya Shaji - Windows XP Terminal</title>
+<meta name="description" content="The resume of Aditya Shaji (CS + AI/ML undergrad, builder of developer tools and local-first LLM runtimes) served as a Windows XP command prompt. Type help.">
+<meta name="author" content="Aditya Shaji">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#245edb">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23245edb'/%3E%3Cpath d='M7 10l6 6-6 6' stroke='%23fff' stroke-width='3.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h9' stroke='%23fff' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/xp.css">
+<link rel="stylesheet" href="css/windows.css">
+<link rel="stylesheet" href="css/terminal.css">
+<link rel="stylesheet" href="css/apps.css">
+</head>
+<body>
+
+<!-- ===================== POST / BOOT BIOS ===================== -->
+<div id="bios" class="stage" role="status" aria-live="polite" aria-label="System boot"></div>
+
+<!-- ===================== SPLASH + PROGRESS ===================== -->
+<div id="splash" class="stage" hidden>
+  <div class="splash-inner">
+    <div class="splash-brand">
+      <svg class="splash-logo" viewBox="0 0 100 100" aria-hidden="true">
+        <g transform="rotate(4 50 50)">
+          <rect x="8" y="10" width="40" height="38" rx="3" fill="#f25022"/>
+          <rect x="52" y="10" width="40" height="38" rx="3" fill="#7fba00"/>
+          <rect x="8" y="52" width="40" height="38" rx="3" fill="#00a4ef"/>
+          <rect x="52" y="52" width="40" height="38" rx="3" fill="#ffb900"/>
+        </g>
+      </svg>
+      <div class="splash-word">Windows<span style="font-style:italic">xp</span>
+        <div class="splash-sub">Professional</div>
+      </div>
+    </div>
+    <div class="splash-bar" id="splash-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    <div class="splash-caption" id="splash-caption">Starting Windows...</div>
+  </div>
+  <div class="splash-skip">press any key to skip</div>
+</div>
+
+<!-- ===================== WELCOME / LOG ON ===================== -->
+<div id="logon" class="stage" hidden>
+  <div class="logon-box">
+    <p class="logon-hello">Welcome</p>
+    <p class="logon-hint">To begin, click your user name</p>
+    <button class="logon-user" id="logon-user" type="button">
+      <svg class="avatar" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="4" fill="#dfe8fb"/>
+        <circle cx="32" cy="24" r="11" fill="#3a5f9e"/>
+        <path d="M10 60c0-13 10-21 22-21s22 8 22 21z" fill="#3a5f9e"/>
+      </svg>
+      <span id="logon-name">Aditya Shaji</span>
+    </button>
+    <div class="logon-opt">
+      <input type="checkbox" id="logon-sound" checked>
+      <label for="logon-sound">Play the startup sound</label>
+    </div>
+  </div>
+  <div class="logon-foot">xp://terminal &nbsp;&middot;&nbsp; built with vanilla HTML, CSS &amp; JavaScript</div>
+</div>
+
+<!-- ===================== DESKTOP ===================== -->
+<div id="desktop">
+  <div id="wallpaper" aria-hidden="true"></div>
+
+  <div id="icon-layer" role="list" aria-label="Desktop icons"></div>
+
+  <div id="window-layer"></div>
+
+  <div id="taskbar">
+    <button id="start-button" type="button" aria-haspopup="true" aria-expanded="false">
+      <svg class="start-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g transform="rotate(4 50 50)">
+          <rect x="8" y="10" width="40" height="38" rx="3" fill="#f25022"/>
+          <rect x="52" y="10" width="40" height="38" rx="3" fill="#7fba00"/>
+          <rect x="8" y="52" width="40" height="38" rx="3" fill="#00a4ef"/>
+          <rect x="52" y="52" width="40" height="38" rx="3" fill="#ffb900"/>
+        </g>
+      </svg>
+      <span>start</span>
+    </button>
+
+    <div id="task-buttons"></div>
+
+    <div id="tray">
+      <button class="tray-icon" id="tray-sound" type="button" title="Sound" aria-label="Toggle sound"></button>
+      <button class="tray-icon is-optional" id="tray-net" type="button" title="Network" aria-label="Network status"></button>
+      <span id="clock" title="">--:--</span>
+      <button id="show-desktop" type="button" title="Show Desktop" aria-label="Show desktop"></button>
+    </div>
+  </div>
+
+  <div id="start-menu" role="menu" aria-label="Start menu"></div>
+  <div id="context-menu" role="menu"></div>
+  <div id="drag-ghost" aria-hidden="true"></div>
+</div>
+
+<div id="tooltip" role="tooltip"></div>
+
+<!-- load order matters: no modules, so index.html works over file:// too -->
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/wm.js"></script>
+<script src="js/fs.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/apps/terminal.js"></script>
+<script src="js/apps/explorer.js"></script>
+<script src="js/apps/notepad.js"></script>
+<script src="js/apps/browser.js"></script>
+<script src="js/apps/minesweeper.js"></script>
+<script src="js/apps/misc.js"></script>
+<script src="js/boot.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
