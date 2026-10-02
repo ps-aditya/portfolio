@@ -18,13 +18,28 @@ Live at **https://ps-aditya.github.io/portfolio/**.
 | `index.html` | Markup + all the CSS, inlined. The greeting is real HTML, so it paints before any JavaScript runs. |
 | `js/data.js` | **All your content.** Config, projects, experience, skills, resume text. This is the only file you need to edit. |
 | `js/main.js` | The terminal: REPL, commands, tab completion, Minesweeper, Snake. |
+| `fonts/GeistMono-latin.woff2` | Geist Mono, self-hosted. One file, all weights, 22 KB, OFL (licence included). |
 | `resume.txt` | Plain-text resume, for recruiters and ATS. |
 | `llms.txt` | Machine-readable summary for AI agents. |
 | `.nojekyll` | Stops GitHub Pages' Jekyll pass from touching anything. |
 
-Total is about 49 KB uncompressed, two network requests, no images and no
-fonts - the entire visual identity is one inline `<style>` block and an
-inline SVG of a dog.
+Three requests, ~58 KB uncompressed. Two are CSS and JS; the third is the
+font. There are no images and no third-party connections - the entire visual
+identity is one inline `<style>` block and an inline SVG of a dog.
+
+## Design
+
+Taken from [kuber.studio](https://kuber.studio/), with two Windows XP
+survivors:
+
+- pure `#000` background, `#ffebcd` text (blanchedalmond, about 17:1
+  contrast), one `#5abb9a` mint accent
+- Geist Mono at 19px, `$ ` in front of every section label
+- links have no underline and no border - a glow on hover instead
+- 6px cream scrollbar, black track
+
+The two XP holdouts are the title bar strip and Rover, bottom-left, where he
+used to sit under the search balloon. Everything else is a terminal.
 
 ## Run it
 
@@ -107,9 +122,10 @@ There is no build step to configure.
 
 - Paints the full greeting before JavaScript runs; the terminal just takes
   over once it is ready.
+- Geist Mono is preloaded and uses `font-display: swap`, so first paint never
+  waits for it. Measured on a throttled 1.6 Mbps / 150 ms RTT profile: first
+  frame 591 ms, typeable 715 ms.
 - Respects `prefers-reduced-motion` (there is nothing to animate) and works
   with a keyboard, a mouse or a thumb.
 - With JavaScript disabled you get the whole thing as readable prose in a
   `<noscript>` block, plus `resume.txt`.
-- The Bliss green is the only Windows XP reference left besides the decorative
-  title bar. Rover is in the corner because he was always the point.

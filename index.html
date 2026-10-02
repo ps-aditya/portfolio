@@ -7,8 +7,11 @@
 <meta name="description" content="Aditya Shaji - CS + AI/ML undergraduate building developer tools and local-first AI runtimes. Type 'help' in the terminal.">
 <meta name="author" content="Aditya Shaji">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0b0c0b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b0c0b'/%3E%3Cpath d='M7 10l5 5-5 5' stroke='%237ec850' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 21h9' stroke='%237ec850' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23000'/%3E%3Cpath d='M7 10l5 5-5 5' stroke='%235abb9a' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 21h9' stroke='%235abb9a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Geist Mono, self-hosted: same origin, one cacheable request, no third party -->
+<link rel="preload" href="fonts/GeistMono-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <!-- JSON-LD: the machine-readable half. Costs nothing, does a lot for search. -->
 <script type="application/ld+json">
@@ -36,199 +39,198 @@
 
 <style>
 /* ---------------------------------------------------------------------------
-   Everything is inline. One document, no render-blocking request, no web fonts.
-   The palette is Bliss green on near-black; the topbar is the only XP remnant.
+   Palette and type follow kuber.studio: pure black, blanchedalmond text, one
+   mint accent, Geist Mono. No borders anywhere. The title bar and Rover are
+   the only two Windows XP references left.
    ------------------------------------------------------------------------ */
+@font-face{
+  font-family:'Geist Mono';
+  src:url('fonts/GeistMono-latin.woff2') format('woff2');
+  font-weight:100 900;
+  font-display:swap;
+}
+
 :root{
-  --bg:#0b0c0b;
-  --bg-2:#121412;
-  --fg:#c8cfc6;
-  --fg-hi:#eef4ea;
-  --fg-dim:#788075;
-  --fg-dimmer:#4d534b;
-  --acc:#7ec850;          /* Bliss green */
-  --acc-dim:#3f6b26;
-  --warn:#d9c25a;         /* Rover yellow */
-  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+  --bg:#000000;
+  --fg:#ffebcd;          /* blanchedalmond - the main text colour */
+  --hi:#ffffff;          /* headings */
+  --name:#ffe4b5;        /* your name */
+  --acc:#5abb9a;         /* mint: prompt, links, rules */
+  --sel:#7fffd4;         /* selected / emphasis */
+  --quiet:#b3a48c;       /* secondary text - still 7:1 on black */
+  --faint:#8a7d69;       /* tertiary text - still 4.6:1 on black */
+  --mono:'Geist Mono',ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{height:100%}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--fg);
-  font:15px/1.55 var(--mono);
+  font:19px/1.6 var(--mono);
   display:flex;flex-direction:column;
   overflow:hidden;
   -webkit-font-smoothing:antialiased;
 }
-::selection{background:var(--acc-dim);color:#fff}
-:focus-visible{outline:1px dotted var(--acc);outline-offset:2px}
+::selection{background:var(--acc);color:#000}
+:focus-visible{outline:1px dotted var(--acc);outline-offset:3px}
 
-/* ---------- the one nostalgic bit: a decorative XP title bar ---------------- */
+/* links: no underline, no border - a glow instead */
+a{color:var(--acc);text-decoration:none}
+a:hover{color:var(--sel);text-shadow:0 0 12px rgba(90,187,154,.55)}
+b,strong{color:var(--hi);font-weight:700}
+
+/* ---------- XP title bar: kept, but every box stripped out ----------------- */
 #topbar{
-  flex:none;display:flex;align-items:center;gap:8px;
-  height:26px;padding:0 6px;
+  flex:none;display:flex;align-items:center;gap:10px;
+  height:26px;padding:0 14px;
   background:linear-gradient(90deg,#000080,#1084d0);
-  color:#fff;font:700 12px/1 Tahoma,"Segoe UI",Verdana,sans-serif;
-  text-shadow:1px 1px 1px rgba(0,0,0,.4);
+  color:#fff;font:700 11px/1 Tahoma,"Segoe UI",Verdana,sans-serif;
+  text-shadow:1px 1px 1px rgba(0,0,0,.45);
+  white-space:nowrap;overflow:hidden;
 }
-#topbar .t-title{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-#topbar .t-btns{display:flex;gap:2px;flex:none}
-#topbar .t-btn{
-  width:18px;height:16px;padding:0;display:grid;place-items:center;
-  background:#d4d0c8;border:1px solid #fff;box-shadow:inset -1px -1px 0 #808080;
-  color:#000;font:700 9px/1 Tahoma,sans-serif;
-}
+#topbar .t-title{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;opacity:.94}
+#topbar .t-btns{display:flex;gap:12px;flex:none;opacity:.8}
 #topbar svg{display:block}
 
 /* ---------- terminal ------------------------------------------------------ */
 #screen{
   flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
-  padding:18px 20px 8px;scrollbar-width:thin;scrollbar-color:#2e352c var(--bg);
+  padding:26px 24px 10px;
 }
-#screen::-webkit-scrollbar{width:10px}
-#screen::-webkit-scrollbar-track{background:var(--bg)}
-#screen::-webkit-scrollbar-thumb{background:#2e352c;border-radius:5px}
+#screen::-webkit-scrollbar{width:6px}
+#screen::-webkit-scrollbar-track{background:var(--bg);border-radius:10px}
+#screen::-webkit-scrollbar-thumb{background:var(--fg);border-radius:10px}
+#screen::-webkit-scrollbar-thumb:hover{background:var(--quiet)}
 
-p{margin:0 0 12px}
-a{color:var(--acc);text-decoration:none;border-bottom:1px solid rgba(126,200,80,.3)}
-a:hover{color:var(--fg-hi);border-bottom-color:var(--acc)}
-b,strong{color:var(--fg-hi);font-weight:700}
+p{margin:0 0 14px}
 
-.lbl{
-  display:block;color:var(--fg-dimmer);letter-spacing:.14em;
-  text-transform:uppercase;font-size:11px;margin:22px 0 8px;
-}
-.lbl:first-child{margin-top:0}
+/* section labels, kuber-style: a mint dollar sign in front */
+.lbl{display:block;color:var(--fg);margin:34px 0 12px;letter-spacing:.02em}
+.lbl::before{content:"$ ";color:var(--acc);font-weight:700}
+.lbl:first-of-type{margin-top:26px}
 
 /* greeting header */
-.head{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
-.head .rover{flex:none;margin-top:2px}
-.head h1{font-size:19px;color:var(--fg-hi);margin:0 0 2px;font-weight:700;letter-spacing:-.01em}
-.head .role{color:var(--fg);margin:0 0 3px}
-.head .meta{color:var(--fg-dimmer);font-size:12px;margin:0}
+.head{margin-bottom:26px}
+.head h1{
+  font-size:clamp(2.1rem,7vw,3.4rem);line-height:1.05;font-weight:700;
+  letter-spacing:-.015em;color:var(--name);margin:0 0 10px;
+  text-shadow:0 0 26px rgba(90,187,154,.35),0 2px 10px rgba(0,0,0,.9);
+}
+.head .role{font-size:1.02em;color:var(--fg);margin:0 0 6px}
+.head .meta{font-size:.82em;color:var(--quiet);margin:0}
 
 /* command index */
-.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px 26px;max-width:1000px}
-.rows .r{display:flex;gap:8px;align-items:baseline;padding:1px 0}
-.rows .c{flex:none;color:var(--acc)}
-.rows .o{color:var(--fg-dimmer)}
-.rows .d{color:var(--fg-dim);font-size:13px}
+.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:2px 34px;max-width:1180px}
+.rows .r{display:flex;gap:9px;align-items:baseline;padding:1px 0;white-space:nowrap}
+.rows .c{flex:none;font-weight:500}
+.rows .o{color:var(--faint)}
+.rows .d{color:var(--quiet);overflow:hidden;text-overflow:ellipsis}
 
 /* generic printed output */
-.line{white-space:pre-wrap;word-break:break-word;min-height:1.55em}
+.line{white-space:pre-wrap;word-break:break-word;min-height:1.6em}
 .wrap{white-space:normal}
-.dim{color:var(--fg-dim)}
-.dimmer{color:var(--fg-dimmer)}
-.hi{color:var(--fg-hi)}
+.dim{color:var(--quiet)}
+.dimmer{color:var(--faint)}
+.hi{color:var(--hi)}
 .acc{color:var(--acc)}
-.warn{color:var(--warn)}
-.entry{margin:0 0 10px}
-.entry .t{color:var(--fg-hi);font-weight:700}
-.entry .m{color:var(--fg-dimmer);font-size:13px}
-.entry .d{color:var(--fg-dim);font-size:13px;padding-left:2ch}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px 24px;max-width:900px}
-.rule{color:var(--fg-dimmer);margin:16px 0 8px}
+.warn{color:var(--sel)}
+.entry{margin:0 0 12px}
+.entry .t{color:var(--hi);font-weight:700}
+.entry .m{color:var(--quiet)}
+.entry .d{color:var(--quiet);padding-left:2ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px 30px;max-width:1000px}
+.rule{color:var(--acc);margin:22px 0 10px;opacity:.85}
 .nowline{color:var(--fg)}
 
 /* ---------- fixed prompt row --------------------------------------------- */
 #bar{
-  flex:none;display:flex;gap:8px;align-items:center;
-  padding:10px 20px 14px;background:var(--bg);
-  border-top:1px solid #1a1d18;
+  flex:none;display:flex;gap:9px;align-items:center;
+  padding:12px 24px 16px;background:var(--bg);
 }
-#who{color:var(--acc);white-space:pre;flex:none}
-#prompt{color:var(--fg-hi);white-space:pre;flex:none}
+#who{color:var(--acc);white-space:pre;flex:none;font-weight:500}
+#prompt{color:var(--acc);white-space:pre;flex:none}
 #input{
   flex:1 1 1ch;min-width:1ch;
   margin:0;padding:0;border:0;background:transparent;outline:none;
-  color:var(--fg-hi);font:inherit;caret-color:var(--acc);caret-shape:square;
+  color:var(--fg);font:inherit;caret-color:var(--fg);caret-shape:square;
+}
+#input::placeholder{color:var(--faint)}
+
+/* ---------- Rover, bottom-left, where he was ------------------------------- */
+#rover{
+  position:fixed;left:16px;bottom:66px;width:62px;height:62px;
+  z-index:4;pointer-events:none;opacity:.95;
+}
+/* a soft pool of black so terminal text stays readable underneath him */
+#rover::before{
+  content:"";position:absolute;inset:-18px -26px -14px -22px;z-index:-1;
+  background:radial-gradient(closest-side,rgba(0,0,0,.92),rgba(0,0,0,0));
 }
 
 /* ---------- games, rendered straight into the output ----------------------- */
-.ms{display:grid;gap:1px;width:max-content;margin:6px 0 10px;user-select:none}
+.ms{display:grid;gap:2px 5px;width:max-content;margin:10px 0 12px;user-select:none}
 .ms button{
-  width:2.1ch;height:1.5em;padding:0;border:0;background:transparent;
-  color:var(--fg-dim);font:inherit;cursor:pointer;
+  min-width:1.6ch;height:1.5em;padding:0;border:0;background:transparent;
+  color:var(--faint);font:inherit;cursor:pointer;
 }
 .ms button:hover{color:var(--acc)}
-.ms button[aria-pressed="true"]{color:var(--warn)}
-.ms .o{border:1px solid #1a1d18}
-.ms .o1{color:#6fa8ff}.ms .o2{color:#7ec850}.ms .o3{color:#e06c6c}
-.ms .o4{color:#c58ce8}.ms .o5{color:#d9c25a}.ms .o6{color:#5fd0c8}
-.ms .o7{color:var(--fg-hi)}.ms .o8{color:var(--fg-dimmer)}
-.ms .boom{color:#ff6b6b}
-.ms-hint{color:var(--fg-dimmer);font-size:13px}
+.ms button[aria-pressed="true"]{color:var(--sel)}
+.ms .o{color:var(--fg)}
+.ms .o1{color:#6fa8ff}.ms .o2{color:#5abb9a}.ms .o3{color:#ff7b72}
+.ms .o4{color:#c58ce8}.ms .o5{color:#ffebcd}.ms .o6{color:#5fd0c8}
+.ms .o7{color:var(--hi)}.ms .o8{color:var(--faint)}
+.ms .boom{color:#ff5f5f}
+.ms-hint{color:var(--quiet);margin-top:4px}
 
-.snake{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin:6px 0 10px}
-.snake pre{margin:0;color:var(--acc);line-height:1.1;letter-spacing:.02em}
-.snake .pad{display:grid;grid-template-columns:repeat(3,34px);grid-auto-rows:32px;gap:3px}
+.snake{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;margin:10px 0 12px}
+.snake pre{margin:0;color:var(--acc);line-height:1.15}
+.snake .pad{display:grid;grid-template-columns:repeat(3,38px);grid-auto-rows:36px;gap:6px}
 .snake .pad button{
-  border:1px solid #1a1d18;background:var(--bg-2);color:var(--fg-dim);
-  font:inherit;border-radius:3px;cursor:pointer;
+  border:0;background:transparent;color:var(--quiet);
+  font:inherit;border-radius:4px;cursor:pointer;
 }
-.snake .pad button:active{background:var(--acc-dim);color:#fff}
+.snake .pad button:hover{color:var(--acc);background:rgba(90,187,154,.12)}
 
 /* ---------- no-JS fallback ------------------------------------------------- */
-.noscript{padding:24px 20px 40px;max-width:760px}
-.noscript h2{font-size:14px;color:var(--fg-hi);margin:24px 0 8px;letter-spacing:.02em}
-.noscript ul{padding-left:20px;margin:0 0 12px}
-.noscript li{margin-bottom:4px}
-.noscript pre{white-space:pre-wrap;background:var(--bg-2);padding:14px;border-radius:4px;overflow-x:auto}
+.noscript{padding:30px 24px 48px;max-width:800px}
+.noscript h1{font-size:2.1rem;color:var(--name);margin:0 0 12px}
+.noscript h2{font-size:1.15rem;color:var(--hi);margin:30px 0 10px}
+.noscript h2::before{content:"$ ";color:var(--acc)}
+.noscript ul{padding-left:22px;margin:0 0 14px}
+.noscript li{margin-bottom:5px}
+.noscript pre{white-space:pre-wrap;color:var(--quiet);margin:0}
 
 @media (max-width:640px){
-  body{font-size:13.5px}
-  #screen{padding:14px 12px 6px}
-  #bar{padding:8px 12px 12px}
-  #who{display:none}          /* keep it short: aditya@portfolio:~$ on a phone */
-  .head .rover{display:none}
-  .rows{grid-template-columns:1fr}
+  body{font-size:17px}
+  #screen{padding:20px 16px 8px}
+  #bar{padding:10px 16px 14px}
+  #who{display:none}
+  .rows{grid-template-columns:1fr;gap:2px}
+  .rows .r{white-space:normal}
+  /* no room for him on a phone - he would sit on top of the command list */
+  #rover{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- ===================== decorative XP title bar ===================== -->
+<!-- ===================== XP title bar ===================== -->
 <div id="topbar" aria-hidden="true">
-  <span class="t-title">Aditya Shaji - C:\Documents and Settings\Aditya\portfolio</span>
+  <span class="t-title">Aditya Shaji — C:\Documents and Settings\Aditya\portfolio</span>
   <span class="t-btns">
-    <span class="t-btn" title="minimise"><svg width="8" height="8" viewBox="0 0 8 8"><rect x="0" y="5" width="8" height="2" fill="#000"/></svg></span>
-    <span class="t-btn" title="maximise"><svg width="8" height="8" viewBox="0 0 8 8"><rect x="0.5" y="0.5" width="7" height="7" fill="none" stroke="#000" stroke-width="1"/><rect x="0.5" y="0.5" width="7" height="2" fill="#000"/></svg></span>
-    <span class="t-btn" title="close"><svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 1l6 6M7 1L1 7" stroke="#000" stroke-width="1.6"/></svg></span>
+    <svg width="8" height="8" viewBox="0 0 8 8"><rect x="0" y="5.5" width="8" height="2" fill="#fff"/></svg>
+    <svg width="8" height="8" viewBox="0 0 8 8"><rect x=".5" y=".5" width="7" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><rect x=".5" y=".5" width="7" height="2" fill="#fff"/></svg>
+    <svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 1l6 6M7 1L1 7" stroke="#fff" stroke-width="1.4"/></svg>
   </span>
 </div>
 
 <!-- ===================== terminal ===================== -->
 <main id="screen" tabindex="-1">
   <div class="head">
-    <!-- Rover. Because of course. -->
-    <svg class="rover" width="44" height="44" viewBox="0 0 64 64" aria-hidden="true">
-      <ellipse cx="32" cy="59" rx="18" ry="2.4" fill="#000" opacity=".28"/>
-      <!-- tail -->
-      <path d="M42 46c6 1 8 7 5 11-2 3-6 3-7 0 3-3 4-7 2-11z" fill="#c98f22"/>
-      <!-- body -->
-      <ellipse cx="33" cy="45" rx="13" ry="14" fill="#f2c043"/>
-      <path d="M25 40c-1.5 6-1.5 12 0 17h15c1.5-6 1.5-12 0-17z" fill="#e5b02f"/>
-      <rect x="25" y="49" width="4.5" height="9" rx="2.2" fill="#f7d163"/>
-      <rect x="31.5" y="49" width="4.5" height="9" rx="2.2" fill="#f7d163"/>
-      <!-- head -->
-      <circle cx="27" cy="25" r="12" fill="#f5c542"/>
-      <!-- floppy ear, hanging down the near side -->
-      <ellipse cx="35" cy="23" rx="5.5" ry="10" fill="#a9701f" transform="rotate(14 35 23)"/>
-      <!-- snout -->
-      <ellipse cx="15.5" cy="29" rx="8.5" ry="6.5" fill="#fad85f"/>
-      <ellipse cx="9" cy="27.5" rx="2.9" ry="2.5" fill="#2a1f10"/>
-      <path d="M12 32q4.5 3.5 8 .5" fill="none" stroke="#a9701f" stroke-width="1.5" stroke-linecap="round"/>
-      <!-- eye -->
-      <circle cx="26" cy="23" r="2.5" fill="#2a1f10"/>
-      <circle cx="26.9" cy="22.1" r="1" fill="#fff"/>
-    </svg>
-    <div>
-      <h1>Aditya Shaji</h1>
-      <p class="role">CS + AI/ML undergraduate &middot; Mumbai, India</p>
-      <p class="meta">portfolio v1.0.0 &middot; hand written html, css &amp; js &middot; no frameworks, no build step, no trackers</p>
-    </div>
+    <h1>Aditya Shaji</h1>
+    <p class="role">CS + AI/ML undergraduate &middot; Mumbai, India</p>
+    <p class="meta">I build developer tools and local-first AI runtimes. &middot; portfolio v1.0.0</p>
   </div>
 
   <p>Type <b>help</b> to see the list of available commands.</p>
@@ -257,6 +259,23 @@ b,strong{color:var(--fg-hi);font-weight:700}
   </div>
 </main>
 
+<!-- ===================== Rover ===================== -->
+<svg id="rover" viewBox="0 0 64 64" aria-hidden="true">
+  <ellipse cx="32" cy="59" rx="18" ry="2.4" fill="#000" opacity=".7"/>
+  <path d="M47 38c6 2 7 10 3 14-2 3-6 3-7 0 3-3 3-8 1-11z" fill="#c98f22"/>
+  <ellipse cx="34" cy="45" rx="14" ry="14" fill="#f2c043"/>
+  <path d="M24 40c-2 7-2 14 0 18h17c2-6 2-13 0-18z" fill="#e5b02f"/>
+  <rect x="24" y="49" width="5" height="9" rx="2.4" fill="#f7d163"/>
+  <rect x="31" y="49" width="5" height="9" rx="2.4" fill="#f7d163"/>
+  <circle cx="27" cy="24" r="12.5" fill="#f5c542"/>
+  <ellipse cx="35.5" cy="22" rx="5.5" ry="10.5" fill="#a9701f" transform="rotate(14 35.5 22)"/>
+  <ellipse cx="15" cy="28" rx="9" ry="6.8" fill="#fad85f"/>
+  <ellipse cx="8" cy="26.5" rx="3" ry="2.6" fill="#2a1f10"/>
+  <path d="M11 31q4.5 3.5 8 .5" fill="none" stroke="#a9701f" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="26" cy="22" r="2.6" fill="#2a1f10"/>
+  <circle cx="26.9" cy="21" r="1.05" fill="#fff"/>
+</svg>
+
 <!-- ===================== prompt ===================== -->
 <div id="bar">
   <span id="who" aria-hidden="true">aditya@portfolio</span><span id="prompt" aria-hidden="true">:~$</span>
@@ -269,18 +288,18 @@ b,strong{color:var(--fg-hi);font-weight:700}
   <style>
     /* with scripting off there is no terminal, so drop the shell and let the
        page scroll like an ordinary document */
-    #screen,#bar{display:none}
+    #screen,#bar,#rover{display:none}
     body{height:auto;overflow:auto;display:block}
   </style>
   <div class="noscript">
-    <h2>This portfolio is a terminal, and JavaScript is off.</h2>
-    <p>So here is the same thing in plain text. The full version is at
-      <a href="resume.txt">resume.txt</a>, and a machine-readable summary at
-      <a href="llms.txt">llms.txt</a>.</p>
+    <h1>Aditya Shaji</h1>
+    <p>This portfolio is a terminal and JavaScript is off, so here is the same
+      thing in plain text. The full version is at <a href="resume.txt">resume.txt</a>,
+      and a machine-readable summary at <a href="llms.txt">llms.txt</a>.</p>
 
-    <h2>Aditya Shaji</h2>
-    <p>CS + AI/ML undergraduate at Atlas SkillTech University, Mumbai, India. I build
-      developer tools and local-first AI runtimes.</p>
+    <h2>Who</h2>
+    <p>CS + AI/ML undergraduate at Atlas SkillTech University, Mumbai, India
+      (Aug 2025 - Aug 2029). I build developer tools and local-first AI runtimes.</p>
 
     <h2>Experience</h2>
     <ul>
@@ -306,9 +325,9 @@ b,strong{color:var(--fg-hi);font-weight:700}
     <h2>Contact</h2>
     <ul>
       <li><a href="https://github.com/ps-aditya">github.com/ps-aditya</a></li>
-      <li><a href="mailto:adityalpha16@gmail.com">adityalpha16@gmail.com</a></li>
       <li><a href="https://www.linkedin.com/in/adityashaji">linkedin.com/in/adityashaji</a></li>
       <li><a href="https://x.com/psdevelop">x.com/psdevelop</a></li>
+      <li><a href="mailto:adityalpha16@gmail.com">adityalpha16@gmail.com</a></li>
     </ul>
   </div>
 </noscript>
