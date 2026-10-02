@@ -14,7 +14,7 @@
   /* ---------------------------------------------------------------------------
    *  >> EDIT ME  <<
    *  ------------------------------------------------------------------------ */
-  var CONFIG = {
+var CONFIG = {
     name: 'Aditya Shaji',
     handle: 'aditya',
     version: '1.0.0',
@@ -29,10 +29,9 @@
     // The "CURRENTLY" line on the front page.
     now: 'building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops',
 
-    // TODO: replace these. Until you do, they render as clear TODOs.
-    email: 'you@example.com',
-    linkedin: 'https://www.linkedin.com/in/<YOUR-LINKEDIN-HANDLE>',
-    twitter: 'https://x.com/<YOUR-HANDLE>',
+    email: 'adityalpha16@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/adityashaji',
+    twitter: 'https://x.com/psdevelop',
     github: 'https://github.com/ps-aditya',
     website: 'https://ps-aditya.github.io/portfolio/',
     resumeUrl: 'resume.txt'

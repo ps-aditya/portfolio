@@ -46,20 +46,20 @@ var CONFIG = {
   name: 'Aditya Shaji',
   handle: 'aditya',
   version: '1.0.0',
-  tagline:  'I build developer tools and local-first AI runtimes.',
-  now:      'building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops',
+  tagline: 'I build developer tools and local-first AI runtimes.',
+  now:     'building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops',
 
-  email:    'you@example.com',                                       // TODO
-  linkedin: 'https://www.linkedin.com/in/<YOUR-LINKEDIN-HANDLE>',    // TODO
-  twitter:  'https://x.com/<YOUR-HANDLE>',                            // TODO
+  email:    'adityalpha16@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/adityashaji',
+  twitter:  'https://x.com/psdevelop',
   github:   'https://github.com/ps-aditya'
 };
 ```
 
-Anything still wrapped in `<ANGLE_BRACKETS>` is a placeholder, and the site
-says so - `contact` marks it `[TODO]` instead of printing a dead link, and
-clicking it tells you which file to open. You cannot ship a broken link by
-accident.
+Anything that looks like `<ANGLE_BRACKETS>`, `example.com` or a `your-*`
+stub is treated as a placeholder: `contact` prints it as `[TODO]` instead of
+a dead link, and clicking it tells you which file to open. You cannot ship a
+broken link by accident.
 
 Two places outside `data.js` also carry the name, and both are one-line edits:
 

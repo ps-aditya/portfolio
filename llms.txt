@@ -16,9 +16,9 @@ AI runtimes. Currently founding Low End LLM.
 ## Contact
 
 - GitHub: https://github.com/ps-aditya
-- LinkedIn: https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE
-- X: https://x.com/YOUR-HANDLE
-- Email: you@example.com
+- LinkedIn: https://www.linkedin.com/in/adityashaji
+- X: https://x.com/psdevelop
+- Email: adityalpha16@gmail.com
 - Location: Mumbai, India
 
 ## Experience
