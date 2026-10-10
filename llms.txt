@@ -9,9 +9,15 @@
 
 ## Who
 
-Aditya Shaji. CS + AI/ML undergraduate at Atlas SkillTech University,
-Mumbai, India (Aug 2025 - Aug 2029). Builds developer tools and local-first
-AI runtimes. Currently founding Low End LLM.
+Aditya Shaji. I build developer tools and local-first AI. Currently building
+Low End LLM, an adaptive runtime that runs quantized LLMs on 4GB-RAM laptops.
+
+Proof: Creator of Redis State Explorer - a VS Code extension with live Redis
+state and a key-diff timeline; 1,000+ downloads; Invited Reviewer, ISMIR 2026.
+Based in Mumbai, India.
+
+Studies Computer Science & AI/ML at Atlas SkillTech University
+(Aug 2025 - Aug 2029). That is where he studies, not what he does.
 
 ## Contact
 
@@ -71,9 +77,10 @@ AI runtimes. Currently founding Low End LLM.
 ## How the site is built
 
 One HTML file with the CSS inlined, plus js/data.js (all content) and
-js/main.js (the terminal). No frameworks, no bundler, no analytics, no cookies,
-no web fonts. Colour palette is Bliss green on near-black; the only surviving
-Windows XP artefact is a decorative title bar. Minesweeper and Snake are
-implemented in js/main.js and render directly into the output stream.
+js/main.js (the terminal), and a self-hosted Geist Mono woff2. No
+frameworks, no bundler, no analytics, no cookies, no third-party requests.
+Pure black background, blanchedalmond text, one mint accent. Minesweeper and
+Snake are implemented in js/main.js and render directly into the output
+stream. There is no window manager, no title bar and no mascot.
 
 Last updated: 2026

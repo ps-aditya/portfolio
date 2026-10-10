@@ -1,12 +1,16 @@
 ﻿Aditya Shaji
 ============
 adityalpha16@gmail.com  |  linkedin.com/in/adityashaji  |  x.com/psdevelop  |  github.com/ps-aditya
-CS + AI/ML undergraduate - Mumbai, India
+Software Developer - developer tooling and local-first AI - Mumbai, India
 
 SUMMARY
 =======
 
-Currently building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops.
+I build developer tools and local-first AI. Currently building Low End LLM - an adaptive runtime that runs quantized LLMs on 4GB-RAM laptops.
+
+  * Creator of Redis State Explorer - a VS Code extension with live Redis state and a key-diff timeline.
+  * 1,000+ downloads.
+  * Invited Reviewer, ISMIR 2026.
 
 EXPERIENCE
 ==========

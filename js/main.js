@@ -77,26 +77,32 @@
     return '<a data-ext href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(label) + '</a>';
   }
 
-  /* ------------------------------- who ---------------------------------- */
+/* ------------------------------- who ---------------------------------- */
   def(['who', 'w', 'about'], 'who I am', function (t) {
+    var nowName = C.now.split(' - ')[0];
+    var nowRest = C.now.split(' - ').slice(1).join(' - ');
+
     blank();
     html('<span class="hi">' + esc(C.name) + '</span>');
-    out(C.role + '  -  ' + C.location, 'dim');
+    out(C.headline, 'hi');
+    out(C.location, 'dim');
     blank();
-    para('I build developer tools and local-first AI runtimes. Currently ' +
-      '<b>' + esc(C.now.split(' - ')[0]) + '</b> - ' +
-      esc(C.now.split(' - ').slice(1).join(' - ') || C.now) + '.');
+
+    rule('currently');
+    para('<b>' + esc(nowName) + '</b> - ' + esc(nowRest) + '.');
     blank();
+
+    rule('proof');
+    C.proof.forEach(function (p) { para('<span class="acc">-</span> ' + esc(p)); });
+    blank();
+
     rule('education');
     D.education.forEach(function (e) {
       html('<span class="hi">' + esc(e.school) + '</span> <span class="dimmer">' + esc(e.period) + '</span>');
       out('  ' + e.degree, 'dim');
     });
     blank();
-    rule('currently');
-    para('<b>' + esc(C.now.split(' - ')[0]) + '</b> - ' +
-      esc(C.now.split(' - ').slice(1).join(' - ')) + '.');
-    blank();
+
     para('<span class="dim">more:</span> ' +
       cmdLink('projects', 'projects') + ' &nbsp; ' + cmdLink('skills', 'skills') +
       ' &nbsp; ' + cmdLink('misc', 'misc') + ' &nbsp; ' + cmdLink('contact', 'contact'));

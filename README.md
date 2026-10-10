@@ -21,25 +21,26 @@ Live at **https://ps-aditya.github.io/portfolio/**.
 | `fonts/GeistMono-latin.woff2` | Geist Mono, self-hosted. One file, all weights, 22 KB, OFL (licence included). |
 | `resume.txt` | Plain-text resume, for recruiters and ATS. |
 | `llms.txt` | Machine-readable summary for AI agents. |
+| `tools/print-resume.js` | Dev helper: `node tools/print-resume.js > resume.txt` keeps the two in sync. |
 | `.nojekyll` | Stops GitHub Pages' Jekyll pass from touching anything. |
 
 Three requests, ~58 KB uncompressed. Two are CSS and JS; the third is the
-font. There are no images and no third-party connections - the entire visual
-identity is one inline `<style>` block and an inline SVG of a dog.
+font. There are no images and no third-party connections.
 
 ## Design
 
-Taken from [kuber.studio](https://kuber.studio/), with two Windows XP
-survivors:
+Taken from [kuber.studio](https://kuber.studio/):
 
-- pure `#000` background, `#ffebcd` text (blanchedalmond, about 17:1
-  contrast), one `#5abb9a` mint accent
+- pure `#000` background, `#ffebcd` text (blanchedalmond, 18:1 contrast), one
+  `#5abb9a` mint accent
 - Geist Mono at 19px, `$ ` in front of every section label
 - links have no underline and no border - a glow on hover instead
 - 6px cream scrollbar, black track
+- a headline that says what I **do**, not where I study. Where I study lives
+  in `misc` and in the resume, which is where it belongs
 
-The two XP holdouts are the title bar strip and Rover, bottom-left, where he
-used to sit under the search balloon. Everything else is a terminal.
+There is no title bar, no mascot and no other Windows XP dressing. The
+browser tab already says "Aditya Shaji's Portfolio".
 
 ## Run it
 

@@ -20,14 +20,21 @@ var CONFIG = {
     version: '1.0.0',
     promptHost: 'portfolio',
 
-    role: 'CS + AI/ML undergraduate',
+    // What I do, not where I study. The degree is a line on the resume, not
+    // the definition - so it lives in EDUCATION and in `misc`, not up here.
+    headline: 'I build developer tools and local-first AI.',
+    role: 'Software Developer - developer tooling and local-first AI',
     location: 'Mumbai, India',
 
-    // The one-liner shown under your name.
-    tagline: 'I build developer tools and local-first AI runtimes.',
+    // Proof, in the order that makes someone want to keep reading.
+    proof: [
+      'Creator of Redis State Explorer - a VS Code extension with live Redis state and a key-diff timeline.',
+      '1,000+ downloads.',
+      'Invited Reviewer, ISMIR 2026.'
+    ],
 
-    // The "CURRENTLY" line on the front page.
-    now: 'building Low End LLM - a runtime that runs quantized LLMs on 4GB-RAM laptops',
+    // The "currently" line on the front page and in `who`.
+    now: 'building Low End LLM - an adaptive runtime that runs quantized LLMs on 4GB-RAM laptops',
 
     email: 'adityalpha16@gmail.com',
     linkedin: 'https://www.linkedin.com/in/adityashaji',
@@ -190,7 +197,9 @@ var CONFIG = {
     L.push('');
 
     rule('SUMMARY');
-    L.push('Currently ' + CONFIG.now + '.');
+    L.push(CONFIG.headline + ' Currently ' + CONFIG.now + '.');
+    L.push('');
+    CONFIG.proof.forEach(function (p) { L.push('  * ' + p); });
     L.push('');
 
     rule('EXPERIENCE');
